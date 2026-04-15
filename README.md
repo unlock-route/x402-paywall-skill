@@ -1,19 +1,126 @@
-# X402 Paywall Skill
+# x402-paywall-skill
 
-Seller-side X Layer skill that turns one route into a paid resource with the
-official OKX seller flow.
+`x402-paywall-skill` is a seller-side X Layer payment skill for the OKX Build X
+Hackathon Human Track / Skills Arena. It turns one protected route into a paid
+resource with the official OKX x402 seller flow, then writes a normalized
+seller receipt plus a public-safe proof bundle for review.
 
-## At A Glance
+The submission is intentionally narrow:
 
 - one hero route: `GET /resource/sync`
-- seller-side only: no buyer product, dashboard, or admin sprawl
-- official OKX seller middleware path on X Layer
-- seller-owned normalized receipt plus public-safe proof artifacts
+- one X Layer payment flow
+- one normalized seller receipt contract
+- one public-safe proof pack that judges can inspect quickly
 
-This repo is intentionally narrow so a judge can understand it fast: one route,
-one payment requirement, one paid retry, one seller receipt contract.
+It does not try to be a buyer wallet product, admin dashboard, or generic
+multi-route monetization platform.
 
-The protected `200` response stays intentionally small:
+## 1. Project Intro
+
+This repo packages the seller side of an x402 paywall flow on X Layer. The goal
+is simple: give an AI-facing service one paid route that can:
+
+1. return `402 Payment Required`
+2. verify the paid retry through the official OKX seller path
+3. settle on X Layer
+4. return the protected payload
+5. persist proof-ready seller artifacts
+
+For this version, the scope stays deliberately tight so the review surface is
+easy to understand and verify.
+
+## 2. Architecture Overview
+
+```mermaid
+flowchart LR
+    A["AI client / caller"] --> B["Seller route /resource/sync"]
+    B --> C["OKX x402 seller middleware"]
+    C --> D["402 Payment Required + accepts payload"]
+    D --> E["Paid retry with payment header"]
+    E --> F["Verify + settle on X Layer"]
+    F --> G["Protected response"]
+    F --> H["Normalized receipt + public-safe proof artifacts"]
+```
+
+Core repo responsibilities:
+
+- define one paid route with X Layer network metadata
+- expose a consistent seller receipt contract from `src/index.ts`
+- capture proof artifacts under `artifacts/hero-runs/`
+- keep the public story centered on the seller flow, not on buyer tooling
+
+## 3. Deployment Status / Seller Address
+
+This submission is a reusable skill package, not a standalone deployed smart
+contract. The reviewable deployment/proof identity for this version is the
+seller wallet plus the verified X Layer settlement evidence.
+
+- Track / Arena: `Human Track / Skills Arena`
+- Network: `eip155:196` (`X Layer Mainnet`)
+- Hero route: `GET /resource/sync`
+- Dedicated seller `PAY_TO_ADDRESS`:
+  `0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`
+- Hero payment asset:
+  `USDT` on X Layer
+  (`0x779ded0c9e1022225f8e0630b35a9b54be713736`)
+- Current live proof tx:
+  `0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`
+
+Public-safe proof reference:
+
+- manifest:
+  `artifacts/hero-runs/2026-04-15T05-36-07-866Z/public-safe/manifest.json`
+- summary:
+  `artifacts/hero-runs/2026-04-15T05-36-07-866Z/public-safe/proof-summary.md`
+
+## 4. OKX / OnchainOS Skill Usage
+
+The repo is built on the official OKX x402 seller stack:
+
+- `@okxweb3/x402-core`
+- `@okxweb3/x402-express`
+- `@okxweb3/x402-evm`
+
+The seller flow follows the official OKX payment model for:
+
+- issuing a `402` requirement
+- verifying the paid retry
+- settling on X Layer
+- recording a seller-owned receipt and proof bundle
+
+Primary repo commands:
+
+```bash
+pnpm typecheck
+pnpm test
+pnpm hero:fallback
+pnpm hero:live
+```
+
+What this repo claims:
+
+- seller-side x402 payment requirement and settlement flow
+- proof-ready seller artifacts for one X Layer route
+
+What this repo does not claim:
+
+- buyer-side wallet orchestration as a product
+- autonomous multi-route monetization
+- generic seller dashboard or admin tooling
+
+## 5. Working Mechanics
+
+### Hero flow
+
+1. define the hero route with X Layer metadata, seller payout address, and
+   asset details
+2. return `402 Payment Required` for `GET /resource/sync`
+3. accept the paid retry and verify it through the OKX seller path
+4. settle the payment on X Layer
+5. return the protected response
+6. write a normalized seller receipt plus public-safe proof artifacts
+
+### Protected response contract
 
 ```json
 {
@@ -23,120 +130,58 @@ The protected `200` response stays intentionally small:
 }
 ```
 
-The receipt truth lives in the proof pack, not in the response body.
+### Artifact contract
 
-## What Judges Can Verify Quickly
-
-1. the route returns `402 Payment Required`
-2. the paid retry is verified and settled through the OKX seller path
-3. the seller repo writes a normalized receipt from final response truth
-4. the work copy exposes a public-safe proof pack through
-   `artifacts/hero-runs/latest.json`
-
-## Current Work-Repo Evidence
-
-- runtime manifest entrypoint: `artifacts/hero-runs/latest.json`
-- current tracked manifest records:
-  - `mode = live`
-  - `status = settled`
-  - `settlementState = settled_onchain`
-- current public-safe proof pack includes a settlement tx hash and explorer link
-
-This is evidence in the current work copy. Before release or public promotion,
-approve the exact proof bundle you want to publish instead of treating every
-work-runtime artifact as final collateral.
-
-## Hero Flow
-
-The repo uses the OKX x402 seller flow on X Layer to:
-
-1. return `402 Payment Required`
-2. verify the paid retry and capture post-settlement `PAYMENT-RESPONSE`
-3. normalize the seller receipt from final response truth
-4. write a public-safe proof bundle for review, demo, and submission ops
-
-## Hero Route
-
-- method: `GET`
-- path: `/resource/sync`
-- network: `eip155:196`
-- asset wording locked to current OKX docs:
-  `0x779ded0c9e1022225f8e0630b35a9b54be713736` = `USDT` on X Layer
-
-## Preflight
-
-`pnpm hero:live` is the primary proof command and fails fast if any of these
-are missing:
-
-- `OKX_API_KEY`
-- `OKX_SECRET_KEY`
-- `OKX_PASSPHRASE`
-- `PAY_TO_ADDRESS`
-- local port and artifact path availability
-
-Current wallet policy for this repo:
-
-- `PAY_TO_ADDRESS` should point to the dedicated paywall seller wallet
-  `0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`
-- do not reuse `x402-payment-operator` buyer/runtime wallet `0xa301...3ff6`
-- do not reuse `x402-payment-operator` seller proof-rig wallet `0x9051...Ce2b`
-
-Optional live-demo helpers:
-
-- set `HERO_WAIT_FOR_PAID_SECONDS` if you want a longer guided demo window
-- open `GET /debug/run` during a live run to inspect the current seller stage,
-  verify summary, settlement capture state, and artifact paths without exposing
-  raw payment material
-
-## Commands
-
-```bash
-pnpm typecheck
-pnpm test
-pnpm hero:fallback
-pnpm hero:live
-```
-
-## Artifact Contract
-
-- `latest.json` carries repo-relative `publicArtifactPath` and `rawArtifactPath`
-- judge-facing links should resolve through `publicArtifactPath`
-- raw/local artifacts are for local inspection only
-- `pnpm hero:fallback` produces the same artifact schema with
+- `artifacts/hero-runs/latest.json` points to the latest proof bundle
+- `publicArtifactPath` points to the judge-safe bundle
+- `rawArtifactPath` keeps the local full bundle for deeper inspection
+- `hero:fallback` preserves the same schema with
   `settlementState = fallback_local`
-- fallback artifacts are backup evidence only and must not be presented as live
-  settlement proof
 
-## What This Repo Proves
+## 6. Proof Of Work
 
-- one seller-owned X Layer route can return `402`
-- the primary proof path stays on the official OKX seller stack
-- the repo owns a stable seller receipt contract
-- the repo can produce a public-safe proof bundle that is easy to review
+The current public-safe proof set shows:
 
-## What This Repo Does Not Try To Be
+- route: `resource-sync`
+- mode: `live`
+- status: `settled`
+- settlement state: `settled_onchain`
+- payer:
+  `0xa301291889d560df0bbd4ac2939ec7a78f1f3ff6`
+- seller pay-to:
+  `0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`
+- X Layer tx:
+  `0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`
 
-- buyer tooling as a product
-- dashboards or admin UI
-- multi-route seller management
-- generic operator workflow
+This submission proves that one seller-owned X Layer route can:
 
-## Release And Submission Note
+- issue a real `402` requirement
+- verify and settle a paid retry
+- produce a normalized seller receipt
+- expose a public-safe proof bundle for review
 
-This work repo is the operational source of truth. For release or public
-submission:
+## 7. Team Info
 
-- promote the approved proof pack intentionally
-- backfill approved public video/contact details separately
-- do not improvise public claims beyond the evidence currently in the repo
+- Public GitHub repo:
+  [unlock-route/x402-paywall-skill](https://github.com/unlock-route/x402-paywall-skill)
+- Public maintainer:
+  [`@ianmark89`](https://github.com/ianmark89)
+- Submission lane:
+  `x402-paywall-skill`
+- Team context:
+  `buildx-team / unlock-route`
 
-## Technical Basis
+## 8. Why It Matters For X Layer
 
-- current Node seller quickstart uses
-  `paymentMiddleware(routes, resourceServer)` for seller wiring
-- seller quickstart:
-  [OKX Seller Quickstart](https://web3.okx.com/es-la/onchainos/dev-docs/payments/payment-use-seller-api)
-- supported network and currency wording:
-  [OKX Supported Networks and Currencies](https://web3.okx.com/vi/onchainos/dev-docs/payments/supported-networks)
-- core x402 seller/facilitator model:
-  [OKX Core Concept](https://web3.okx.com/cs/onchainos/dev-docs/payments/core-concept)
+X Layer needs reusable agent-facing payment building blocks, not only end-user
+apps. This repo packages one narrow seller-side monetization path that other
+agent workflows can understand quickly:
+
+- one route
+- one payment requirement
+- one X Layer settlement proof
+- one receipt/proof contract that is easy to audit
+
+That makes it a better fit for the Skills Arena than a broader product claim,
+while still showing real X Layer payment activity and official OKX payment-stack
+integration.
