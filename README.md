@@ -88,6 +88,22 @@ The seller flow follows the official OKX payment model for:
 - settling on X Layer
 - recording a seller-owned receipt and proof bundle
 
+The full payment path also exercises the official OKX OnchainOS wallet surface
+on the buyer/runtime side before the paid retry is sent back to this seller
+repo:
+
+- install the official `okx/onchainos-skills` bundle
+- authenticate the Agentic Wallet runtime
+- run `onchainos wallet status`
+- run `onchainos wallet addresses --chain xlayer`
+- run
+  `onchainos wallet balance --chain xlayer --token-address 0x779ded0c9e1022225f8e0630b35a9b54be713736`
+
+This wallet usage is a bounded supporting runtime for the paid retry, not a
+claim that `x402-paywall-skill` itself is a buyer-wallet product. The repo stays
+seller-side; the authenticated Agentic Wallet is the paired runtime that funds
+and sends the payment which this repo then verifies and settles.
+
 Primary repo commands:
 
 ```bash
