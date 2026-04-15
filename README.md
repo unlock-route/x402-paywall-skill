@@ -96,8 +96,7 @@ repo:
 - authenticate the Agentic Wallet runtime
 - run `onchainos wallet status`
 - run `onchainos wallet addresses --chain xlayer`
-- run
-  `onchainos wallet balance --chain xlayer --token-address 0x779ded0c9e1022225f8e0630b35a9b54be713736`
+- confirm balance readiness for the configured X Layer payment asset
 
 This wallet usage is a bounded supporting runtime for the paid retry, not a
 claim that `x402-paywall-skill` itself is a buyer-wallet product. The repo stays
