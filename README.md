@@ -166,6 +166,10 @@ This submission proves that one seller-owned X Layer route can:
   [unlock-route/x402-paywall-skill](https://github.com/unlock-route/x402-paywall-skill)
 - Public maintainer:
   [`@ianmark89`](https://github.com/ianmark89)
+- Contact email:
+  `REPLACE_WITH_PUBLIC_EMAIL_BEFORE_SUBMIT`
+- Telegram:
+  `REPLACE_WITH_PUBLIC_TELEGRAM_BEFORE_SUBMIT`
 - Submission lane:
   `x402-paywall-skill`
 - Team context:

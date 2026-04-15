@@ -1,8 +1,8 @@
 ---
 name: x402-paywall-skill
-description: "Create x402 payment requirements, verify payment payloads, and return settlement receipts on X Layer"
+description: "Seller-side X Layer x402 skill that creates one payment requirement, verifies the paid retry, and returns a normalized settlement receipt"
 version: "1.0.0"
-author: "FILL_ME_AUTHOR"
+author: "ianmark89"
 tags:
   - x402
   - payment
@@ -14,23 +14,23 @@ tags:
 
 ## Overview
 
-This skill turns an agent action into a paid x402 flow on X Layer. It helps an agent
-create a payment requirement, verify an incoming x402 payload, and produce a
-portable settlement receipt with transaction metadata.
+This skill packages a seller-side x402 paywall flow on X Layer. It helps a
+service owner expose one paid route, verify the paid retry, and produce a
+portable seller receipt with settlement metadata.
 
 ## Pre-flight Checks
 
 Before using this skill, ensure:
 
-1. The requester has an X Layer payment asset and destination wallet.
+1. The seller has an X Layer payout wallet and a paid route to protect.
 2. OKX credentials for x402 verification/settlement are configured out-of-band.
-3. The agent can verify final transaction hashes on the X Layer explorer.
+3. The operator can verify final transaction hashes on the X Layer explorer.
 
 ## Commands
 
 ### Create Requirement
 
-When the agent needs to gate a resource, produce a payment requirement with:
+When the seller needs to gate a resource, produce a payment requirement with:
 
 - amount
 - asset
@@ -46,8 +46,8 @@ Required output shape:
   "requestId": "x402-paywall_xxxxxxxx",
   "settlement": {
     "chainIndex": "196",
-    "currencySymbol": "USDC",
-    "assetAddress": "0x..."
+    "currencySymbol": "USDT",
+    "assetAddress": "0x779ded0c9e1022225f8e0630b35a9b54be713736"
   }
 }
 ```
@@ -71,11 +71,11 @@ When verification succeeds:
 
 ### Example: Paid Execution Trace
 
-1. Create an x402 payment requirement for a premium execution trace.
-2. Wait for the user or upstream agent to send the payment payload.
+1. Create an x402 payment requirement for `GET /resource/sync`.
+2. Wait for the caller or upstream agent to send the payment payload.
 3. Verify the payload.
 4. Settle the payment.
-5. Return a receipt bundle and explorer link.
+5. Return a seller receipt bundle and explorer link.
 
 ## Error Handling
 

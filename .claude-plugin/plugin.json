@@ -3,7 +3,7 @@
   "description": "Installable seller-side X Layer x402 skill for one paid route with normalized receipts and public-safe proof artifacts",
   "version": "1.0.0",
   "author": {
-    "name": "buildx-team"
+    "name": "ianmark89"
   },
   "license": "MIT",
   "keywords": ["x402", "seller", "paywall", "xlayer", "proof", "okx"]

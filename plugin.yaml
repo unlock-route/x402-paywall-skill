@@ -3,7 +3,7 @@ name: x402-paywall-skill
 version: "1.0.0"
 description: "Installable seller-side X Layer x402 skill for one paid route with normalized receipts and public-safe proof artifacts"
 author:
-  name: "Jarwo Suki"
+  name: "ianmark89"
   github: "ianmark89"
 license: MIT
 category: defi-protocol
