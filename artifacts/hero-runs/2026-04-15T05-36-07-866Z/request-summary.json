@@ -1,0 +1,13 @@
+{
+  "routeId": "resource-sync",
+  "method": "GET",
+  "path": "/resource/sync",
+  "description": "Paid X Layer resource sync",
+  "network": "eip155:196",
+  "payTo": "0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5",
+  "price": "$0.001",
+  "assetAddress": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
+  "assetSymbol": "USDT",
+  "maxTimeoutSeconds": 300,
+  "mimeType": "application/json"
+}

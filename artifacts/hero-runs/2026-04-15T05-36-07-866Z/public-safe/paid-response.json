@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "body": {
+    "ok": true,
+    "routeId": "resource-sync",
+    "resource": "premium X Layer seller payload"
+  }
+}

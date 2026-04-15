@@ -1,0 +1,5 @@
+pnpm hero:live
+baseUrl=http://127.0.0.1:4000
+unpaid_status=402
+paid_status=200
+payment_response_header_captured=true

@@ -1,0 +1,21 @@
+{
+  "runId": "2026-04-15T05-36-07-866Z",
+  "routeId": "resource-sync",
+  "mode": "live",
+  "status": "settled",
+  "settlementState": "settled_onchain",
+  "requestId": "resource-sync-2026-04-15T05-36-07-866Z",
+  "timestamp": "2026-04-15T05:38:16.703Z",
+  "network": "eip155:196",
+  "chainIndex": "196",
+  "scheme": "exact",
+  "payTo": "0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5",
+  "payer": "0xa301291889d560df0bbd4ac2939ec7a78f1f3ff6",
+  "assetAddress": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
+  "assetSymbol": "USDT",
+  "amount": "$0.001",
+  "settlementTxHash": "0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4",
+  "explorerUrl": "https://www.okx.com/web3/explorer/xlayer/tx/0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4",
+  "invalidReason": null,
+  "summary": "Live seller proof captured from verify and PAYMENT-RESPONSE settlement evidence"
+}

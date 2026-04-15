@@ -1,0 +1,14 @@
+{
+  "runId": "2026-04-15T05-36-07-866Z",
+  "mode": "live",
+  "timestamp": "2026-04-15T05:36:07.866Z",
+  "gitCommit": "0101b12",
+  "network": "eip155:196",
+  "routeId": "resource-sync",
+  "payTo": "0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5",
+  "payer": "0xa301291889d560df0bbd4ac2939ec7a78f1f3ff6",
+  "status": "settled",
+  "settlementState": "settled_onchain",
+  "publicArtifactPath": "artifacts/hero-runs/2026-04-15T05-36-07-866Z/public-safe",
+  "rawArtifactPath": "artifacts/hero-runs/2026-04-15T05-36-07-866Z"
+}

@@ -1,0 +1,35 @@
+{
+  "status": 402,
+  "headers": {
+    "connection": "keep-alive",
+    "content-length": "2",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Wed, 15 Apr 2026 05:36:08 GMT",
+    "etag": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\"",
+    "keep-alive": "timeout=5",
+    "payment-required": "eyJ4NDAyVmVyc2lvbiI6MiwiZXJyb3IiOiJQYXltZW50IHJlcXVpcmVkIiwicmVzb3VyY2UiOnsidXJsIjoiaHR0cDovLzEyNy4wLjAuMTo0MDAwL3Jlc291cmNlL3N5bmMiLCJkZXNjcmlwdGlvbiI6IlBhaWQgWCBMYXllciByZXNvdXJjZSBzeW5jIiwibWltZVR5cGUiOiJhcHBsaWNhdGlvbi9qc29uIn0sImFjY2VwdHMiOlt7InNjaGVtZSI6ImV4YWN0IiwibmV0d29yayI6ImVpcDE1NToxOTYiLCJhbW91bnQiOiIxMDAwIiwiYXNzZXQiOiIweDc3OWRlZDBjOWUxMDIyMjI1ZjhlMDYzMGIzNWE5YjU0YmU3MTM3MzYiLCJwYXlUbyI6IjB4MTMwMGU1RDhFODEyNmM2MTNiODJiNEYwMmYxMzhjYmRGNzZGRGViNSIsIm1heFRpbWVvdXRTZWNvbmRzIjozMDAsImV4dHJhIjp7Im5hbWUiOiJVU0Tigq4wIiwidmVyc2lvbiI6IjEifX1dfQ==",
+    "x-powered-by": "Express"
+  },
+  "body": {},
+  "receipt": {
+    "runId": "2026-04-15T05-36-07-866Z",
+    "routeId": "resource-sync",
+    "mode": "live",
+    "status": "required",
+    "settlementState": null,
+    "requestId": "resource-sync-2026-04-15T05-36-07-866Z",
+    "timestamp": "2026-04-15T05:36:08.982Z",
+    "network": "eip155:196",
+    "chainIndex": "196",
+    "scheme": "exact",
+    "payTo": "0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5",
+    "payer": null,
+    "assetAddress": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
+    "assetSymbol": "USDT",
+    "amount": "$0.001",
+    "settlementTxHash": null,
+    "explorerUrl": null,
+    "invalidReason": null,
+    "summary": "Unpaid request returned HTTP 402"
+  }
+}

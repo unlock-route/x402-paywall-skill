@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "headers": {
+    "x-powered-by": "Express",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "81",
+    "etag": "W/\"51-QN0WyGrCgHMENSUr4a+Oc1TTKbA\"",
+    "payment-response": "eyJlcnJvck1lc3NhZ2UiOm51bGwsImVycm9yUmVhc29uIjpudWxsLCJuZXR3b3JrIjoiZWlwMTU1OjE5NiIsInBheWVyIjoiMHhhMzAxMjkxODg5ZDU2MGRmMGJiZDRhYzI5MzllYzdhNzhmMWYzZmY2Iiwic3RhdHVzIjoic3VjY2VzcyIsInN1Y2Nlc3MiOnRydWUsInRyYW5zYWN0aW9uIjoiMHgzMmFmYTc2NzVhYzBjMzgwNmJiMDdiZjRkZTU1ZGQyNjUyM2YxMDU3MmMwMzdhMzQyOWUxMWY4YzU2YTc4NmI0In0="
+  },
+  "body": {
+    "ok": true,
+    "routeId": "resource-sync",
+    "resource": "premium X Layer seller payload"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "verify": {
+    "invalidMessage": null,
+    "invalidReason": null,
+    "isValid": true,
+    "payer": "0xa301291889d560df0bbd4ac2939ec7a78f1f3ff6"
+  },
+  "settlement": {
+    "errorMessage": null,
+    "errorReason": null,
+    "network": "eip155:196",
+    "payer": "0xa301291889d560df0bbd4ac2939ec7a78f1f3ff6",
+    "status": "success",
+    "success": true,
+    "transaction": "0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4"
+  },
+  "capture": {
+    "paymentResponseHeaderCaptured": true,
+    "captureSource": "afterVerifyHook+paymentResponseHeader",
+    "finalHttpStatus": 200,
+    "notes": []
+  }
+}

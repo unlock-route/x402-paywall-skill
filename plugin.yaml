@@ -1,0 +1,23 @@
+schema_version: 1
+name: x402-paywall-skill
+version: "1.0.0"
+description: "Installable seller-side X Layer x402 skill for one paid route with normalized receipts and public-safe proof artifacts"
+author:
+  name: "Jarwo Suki"
+  github: "ianmark89"
+license: MIT
+category: defi-protocol
+tags:
+  - x402
+  - seller
+  - paywall
+  - xlayer
+  - proof
+  - okx
+
+components:
+  skill:
+    dir: "."
+
+api_calls:
+  - "web3.okx.com"

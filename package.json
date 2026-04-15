@@ -1,0 +1,41 @@
+{
+  "name": "x402-paywall-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Seller-side X Layer x402 skill for one paid route with normalized receipts and proof-ready artifacts",
+  "keywords": [
+    "x402",
+    "seller",
+    "paywall",
+    "xlayer",
+    "proof",
+    "okx"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "hero:fallback": "tsx src/demo.ts --mode fallback",
+    "hero:live": "tsx src/demo.ts --mode live",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@okxweb3/x402-core": "^0.1.0",
+    "@okxweb3/x402-evm": "^0.1.0",
+    "@okxweb3/x402-express": "^0.1.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}
