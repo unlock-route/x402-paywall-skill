@@ -103,6 +103,33 @@ claim that `x402-paywall-skill` itself is a buyer-wallet product. The repo stays
 seller-side; the authenticated Agentic Wallet is the paired runtime that funds
 and sends the payment which this repo then verifies and settles.
 
+### Human approval loop
+
+For the Human Track story, the approval boundary is explicit:
+
+1. the caller asks for `GET /resource/sync`
+2. this seller returns `402 Payment Required` with the X Layer quote
+3. the paired agent/runtime surfaces the charge details to the human
+4. the human decides whether to approve this one payment
+5. only after approval does the authenticated wallet runtime send the paid retry
+6. this seller verifies, settles, returns the protected payload, and writes the
+   proof bundle
+
+That keeps the repo seller-side while still showing real AI × human
+collaboration: the agent explains the charge, the human approves or rejects it,
+and the seller skill verifies and settles the resulting retry.
+
+Example prompt/confirmation used for the demo path:
+
+```text
+Fetch http://127.0.0.1:4000/resource/sync.
+If it returns 402, show me the charge, ask me before paying, then complete the payment and return the protected result.
+```
+
+```text
+Yes, proceed with this one payment only if the charge matches the 402 quote.
+```
+
 Primary repo commands:
 
 ```bash
@@ -175,12 +202,14 @@ This submission proves that one seller-owned X Layer route can:
 - produce a normalized seller receipt
 - expose a public-safe proof bundle for review
 
-## 7. Team Info
+## 7. Public Submission Surface
 
 - Public GitHub repo:
   [unlock-route/x402-paywall-skill](https://github.com/unlock-route/x402-paywall-skill)
 - Public maintainer:
   [`@ianmark89`](https://github.com/ianmark89)
+- Public contact surface:
+  repo and maintainer profile above
 - Submission lane:
   `x402-paywall-skill`
 - Team context:
