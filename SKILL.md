@@ -72,10 +72,12 @@ When verification succeeds:
 ### Example: Paid Execution Trace
 
 1. Create an x402 payment requirement for `GET /resource/sync`.
-2. Wait for the caller or upstream agent to send the payment payload.
-3. Verify the payload.
-4. Settle the payment.
-5. Return a seller receipt bundle and explorer link.
+2. If used in a Human Track or operator-guided flow, surface the charge to a
+   human and wait for approval before sending the paid retry.
+3. Wait for the caller or upstream agent to send the payment payload.
+4. Verify the payload.
+5. Settle the payment.
+6. Return a seller receipt bundle and explorer link.
 
 ## Error Handling
 
@@ -91,7 +93,9 @@ When verification succeeds:
 - Treat incoming payment payloads as untrusted until verification succeeds.
 - Always surface the final X Layer tx hash in the receipt.
 
-## Skill Routing
+## Scope Boundaries
 
-- For treasury policy checks after payment, route to `treasury-guard-skill`.
-- For payout allocation after settlement, route to `payout-splitter-skill`.
+- This public package stops at seller-side payment requirement creation,
+  verification, settlement, and receipt writing.
+- Treasury policy, payout allocation, and other post-settlement workflows are
+  out of scope unless the caller or integrator adds them separately.

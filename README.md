@@ -59,12 +59,12 @@ seller wallet plus the verified X Layer settlement evidence.
 - Network: `eip155:196` (`X Layer Mainnet`)
 - Hero route: `GET /resource/sync`
 - Dedicated seller `PAY_TO_ADDRESS`:
-  `0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`
+  [`0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`](https://www.okx.com/web3/explorer/xlayer/address/0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5)
 - Hero payment asset:
   `USDT` on X Layer
   (`0x779ded0c9e1022225f8e0630b35a9b54be713736`)
 - Current live proof tx:
-  `0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`
+  [`0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`](https://www.okx.com/web3/explorer/xlayer/tx/0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4)
 
 Public-safe proof reference:
 
@@ -139,6 +139,42 @@ pnpm hero:fallback
 pnpm hero:live
 ```
 
+### Review Surface
+
+- the public source snapshot includes 20 vitest cases around receipt states,
+  settlement derivation, artifact safety, and proof-bundle writing
+- `GET /debug/run` exposes the current seller run state during live demos and
+  guided review
+- public-safe artifacts redact reusable payment material while the raw bundle
+  remains available for deeper local inspection
+
+### Typed Seller Contract
+
+From a local checkout, the core seller contract stays small and typed:
+
+```ts
+import { createHeroRouteDefinition, buildReceipt } from "./src/index.ts";
+
+const route = createHeroRouteDefinition({
+  payTo: "0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5",
+  assetAddress: "0x779ded0c9e1022225f8e0630b35a9b54be713736"
+});
+
+const receipt = buildReceipt({
+  runId: "demo-run",
+  routeId: route.routeId,
+  mode: "live",
+  status: "settled",
+  settlementState: "settled_onchain",
+  payTo: route.payTo,
+  settlementTxHash: "0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4",
+  summary: "Live seller proof captured from verify and PAYMENT-RESPONSE settlement evidence"
+});
+```
+
+This snippet demonstrates the typed seller contract; the live proof still comes
+from the committed artifact bundle.
+
 What this repo claims:
 
 - seller-side x402 payment requirement and settlement flow
@@ -193,7 +229,10 @@ The current public-safe proof set shows:
 - seller pay-to:
   `0x1300e5D8E8126c613b82b4F02f138cbdF76FDeb5`
 - X Layer tx:
-  `0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`
+  [`0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4`](https://www.okx.com/web3/explorer/xlayer/tx/0x32afa7675ac0c3806bb07bf4de55dd26523f10572c037a3429e11f8c56a786b4)
+
+The public-safe proof bundle also carries the explorer URL and settlement
+evidence alongside the normalized seller receipt.
 
 This submission proves that one seller-owned X Layer route can:
 
